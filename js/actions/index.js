@@ -1,9 +1,8 @@
 var TARGET_NUMBER = 'TARGET_NUMBER';
-var targetNumber = function(number) {
+var targetNumber = function() {
     return {
         type: TARGET_NUMBER,
-        newGame: true,
-        newNumber: number
+        newGame: true
     }
 };
 
@@ -15,15 +14,17 @@ var submitGuess = function(guess) {
     };
 };
 
-var RETURN_ANSWER = 'SUBMIT_GUESS';
+/*var RETURN_ANSWER = 'RETURN_ANSWER';
 var returnAnswer = function(answer) {
     return {
         type: RETURN_ANSWER,
         answer: answer
     };
 };
-
-exports.ADD_REPOSITORY = ADD_REPOSITORY;
-exports.addRepository = addRepository;
-exports.RATE_REPOSITORY = RATE_REPOSITORY;
-exports.rateRepository = rateRepository;
+*/
+exports.TARGET_NUMBER = TARGET_NUMBER;
+exports.targetNumber = targetNumber;
+exports.SUBMIT_GUESS = SUBMIT_GUESS;
+exports.submitGuess = submitGuess;
+/*exports.RETURN_ANSWER = RETURN_ANSWER;
+exports.returnAnswer = returnAnswer;*/
