@@ -14,7 +14,7 @@ var submitGuess = function(guess) {
     };
 };
 
-exports.TARGET_NUMBER = NEW_GAME;
-exports.targetNumber = newGame;
+exports.NEW_GAME = NEW_GAME;
+exports.newGame = newGame;
 exports.SUBMIT_GUESS = SUBMIT_GUESS;
 exports.submitGuess = submitGuess;

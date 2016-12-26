@@ -4,20 +4,31 @@ var connect = require('react-redux').connect;
 
 var GuessForm = require('./guess-form');
 var Results = require('./results');
+var actions = require('../actions/index');
 
-var Game = function(props) {
-    return (
-        <div>
-        </div>
-    );
-};
+var Game = React.createClass({
+    newGame: function() {
+        this.props.dispatch(actions.newGame());
+    },
+    render: function() {
+        return (
+            <div>
+                <button id="js-new-game" type="button" onClick={this.newGame}>New Game</button>
+                <GuessForm state={this.props} />
+                <Results state={this.props} />
+            </div>
+        );
+    }
+});
 
 var mapStateToProps = function(state, props) {
     return {
-        repositories: state
+        targetNumber: state.targetNumber,
+        guesses: state.guesses,
+        responses: state.responses
     };
 };
 
-var Container = connect(mapStateToProps)(RepositoryList);
+var Container = connect(mapStateToProps)(Game);
 
 module.exports = Container;

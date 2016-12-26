@@ -26,7 +26,9 @@ var reducer = function(state, action) {
         
         var distance = Math.abs(state.targetNumber - action.guess);
         var response;
-        if (distance < 10) {
+        if (distance < 5) {
+            response = "Hot";
+        } else if (distance < 10) {
             response = "Very warm";
         } else if (distance < 20) {
             response = "Warm";
