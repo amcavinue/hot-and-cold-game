@@ -1,7 +1,7 @@
-var TARGET_NUMBER = 'TARGET_NUMBER';
-var targetNumber = function() {
+var NEW_GAME = 'TARGET_NUMBER';
+var newGame = function() {
     return {
-        type: TARGET_NUMBER,
+        type: NEW_GAME,
         newGame: true
     }
 };
@@ -14,7 +14,7 @@ var submitGuess = function(guess) {
     };
 };
 
-exports.TARGET_NUMBER = TARGET_NUMBER;
-exports.targetNumber = targetNumber;
+exports.TARGET_NUMBER = NEW_GAME;
+exports.targetNumber = newGame;
 exports.SUBMIT_GUESS = SUBMIT_GUESS;
 exports.submitGuess = submitGuess;
