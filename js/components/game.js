@@ -36,7 +36,6 @@ var Game = React.createClass({
 });
 
 var mapStateToProps = function(state, props) {
-    console.log(state, 39);
     return {
         targetNumber: state.targetNumber,
         guesses: state.guesses,
