@@ -5,6 +5,8 @@ var initialState = {
     targetNumber: null,
     guesses: [],
     responses: [],
+    totalGuesses: 0,
+    fewestGuesses: null,
     alreadyGuessed: false,
     wonGame: false
 };
@@ -16,7 +18,10 @@ var reducer = function(state, action) {
         return update(state, {
             targetNumber: {$set: Math.floor(Math.random() * 100) + 1},
             guesses: {$set: []},
-            responses: {$set: []}
+            responses: {$set: []},
+            totalGuesses: {$set: 0},
+            alreadyGuessed: {$set: false},
+            wonGame: {$set: false}
         });
     }
     else if (action.type === actions.SUBMIT_GUESS) {
@@ -30,6 +35,7 @@ var reducer = function(state, action) {
         
         if (Number(action.guess) === Number(state.targetNumber)) {
             return update(state, {
+                totalGuesses: {$set: state.totalGuesses + 1},
                 wonGame: {$set: true},
             });
         }
@@ -49,6 +55,7 @@ var reducer = function(state, action) {
         return update(state, {
             guesses: {$push: [action.guess]},
             responses: {$push: [response]},
+            totalGuesses: {$set: state.totalGuesses + 1},
             alreadyGuessed: {$set: false},
             wonGame: {$set: false}
         });
@@ -58,6 +65,13 @@ var reducer = function(state, action) {
             alreadyGuessed: {$set: false},
             wonGame: {$set: false}
         });
+    } else if (action.type === actions.FETCH_GUESSES_SUCCESS) {
+        return update(state, {
+            fewestGuesses: {$set: action.lowestGuess}
+        });
+    } else if (action.type === actions.FETCH_GUESSES_ERROR) {
+        console.log('An error occurred: ' + action.error);
+        return state;
     }
 
     return state;

@@ -1,9 +1,10 @@
-var reducers = require('./reducers/index');
-var _ = require('lodash');
 var redux = require('redux');
 var createStore = redux.createStore;
+var applyMiddleware = redux.applyMiddleware;
+var thunk = require('redux-thunk').default;
 
-var actions = require('./actions/index');
-var store = createStore(reducers.reducer);
+var reducers = require('./reducers/index');
 
+
+var store = createStore(reducers.reducer, applyMiddleware(thunk));
 module.exports  = store;
