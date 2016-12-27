@@ -10,7 +10,21 @@ var Game = React.createClass({
     newGame: function() {
         this.props.dispatch(actions.newGame());
     },
+    componentDidUpdate: function() {
+        if (this.props.wonGame || this.props.alreadyGuessed) {
+            this.props.dispatch(actions.resetAlerts());
+        }
+    },
+    alerts: function() {
+        if (this.props.alreadyGuessed) {
+            alert('You\'ve already chosen that number.');
+        } else if (this.props.wonGame) {
+            alert('You won the game! Click new game to play again.');
+        }
+    },
     render: function() {
+        this.alerts();
+        
         return (
             <div>
                 <button id="js-new-game" type="button" onClick={this.newGame}>New Game</button>
@@ -25,7 +39,9 @@ var mapStateToProps = function(state, props) {
     return {
         targetNumber: state.targetNumber,
         guesses: state.guesses,
-        responses: state.responses
+        responses: state.responses,
+        wonGame: state.wonGame,
+        alreadyGuessed: state.alreadyGuessed
     };
 };
 

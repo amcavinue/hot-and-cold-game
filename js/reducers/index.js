@@ -4,7 +4,9 @@ var update = require('react-addons-update');
 var initialState = {
     targetNumber: null,
     guesses: [],
-    responses: []
+    responses: [],
+    alreadyGuessed: false,
+    wonGame: false
 };
 
 var reducer = function(state, action) {
@@ -18,10 +20,19 @@ var reducer = function(state, action) {
         });
     }
     else if (action.type === actions.SUBMIT_GUESS) {
+        console.log(action.guess, state.targetNumber, 23);
         for (var i = 0; i < state.guesses.length; i++) {
             if (action.guess === state.guesses[i]) {
-                return state;
+                return update(state, {
+                    alreadyGuessed: {$set: true},
+                });
             }
+        }
+        
+        if (Number(action.guess) === Number(state.targetNumber)) {
+            return update(state, {
+                wonGame: {$set: true},
+            });
         }
         
         var distance = Math.abs(state.targetNumber - action.guess);
@@ -38,7 +49,15 @@ var reducer = function(state, action) {
         
         return update(state, {
             guesses: {$push: [action.guess]},
-            responses: {$push: [response]}
+            responses: {$push: [response]},
+            alreadyGuessed: {$set: false},
+            wonGame: {$set: false}
+        });
+    }
+    else if (action.type === actions.RESET_ALERTS) {
+        return update(state, {
+            alreadyGuessed: {$set: false},
+            wonGame: {$set: false}
         });
     }
 
