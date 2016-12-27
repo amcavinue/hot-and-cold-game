@@ -15,12 +15,11 @@ var reducer = function(state, action) {
     if (action.type === actions.NEW_GAME) {
         return update(state, {
             targetNumber: {$set: Math.floor(Math.random() * 100) + 1},
-            guesses: [],
-            responses: []
+            guesses: {$set: []},
+            responses: {$set: []}
         });
     }
     else if (action.type === actions.SUBMIT_GUESS) {
-        console.log(action.guess, state.targetNumber, 23);
         for (var i = 0; i < state.guesses.length; i++) {
             if (action.guess === state.guesses[i]) {
                 return update(state, {
